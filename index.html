@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Free AI Text Humanizer. Rewrite AI-generated content to sound more natural, clear, and human.">
+    <meta name="keywords" content="AI text humanizer, AI humanizer, humanize AI text, make AI text human, AI writing tool">
+    <meta name="author" content="ToolBox">
+
+    <title>AI Text Humanizer - Make AI Text Sound Human | ToolBox</title>
+
+    
+    <style type="text/css">
+    /* =========================================================
+    TOOLBOX — AI TEXT HUMANIZER
+    ========================================================= */
+    
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+    
+    html {
+    scroll-behavior: smooth;
+    }
+    
+    body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f7f8fa;
+    color: #111111;
+    line-height: 1.6;
+    }
+    
+    a {
+    color: inherit;
+    text-decoration: none;
+    }
+    
+    button,
+    select,
+    textarea {
+    font: inherit;
+    }
+    
+    button {
+    cursor: pointer;
+    }
+    
+    .container {
+    width: min(1180px, 92%);
+    margin: 0 auto;
+    }
+    
+    
+    /* =========================================================
+    HEADER
+    ========================================================= */
+    
+    .site-header {
+    background: #ffffff;
+    border-bottom: 1px solid #e8e8e8;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    }
+    
+    .header-container {
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    }
+    
+    .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    }
+    
+    .logo-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    display: grid;
+    place-items: center;
+    background: #111111;
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 800;
+    }
+    
+    .main-nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    }
+    
+    .main-nav a {
+    color: #555555;
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.2s ease;
+    }
+    
+    .main-nav a:hover {
+    color: #111111;
+    }
+    
+    .menu-toggle {
+    display: none;
+    border: 0;
+    background: transparent;
+    font-size: 25px;
+    line-height: 1;
+    }
+    
+    
+    /* =========================================================
+    HERO
+    ========================================================= */
+    
+    .hero {
+    background: #111111;
+    color: #ffffff;
+    padding: 95px 0 100px;
+    text-align: center;
+    overflow: hidden;
+    }
+    
+    .hero-content {
+    max-width: 820px;
+    }
+    
+    .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 15px;
+    border: 1px solid #333333;
+    border-radius: 50px;
+    color: #d8d8d8;
+    background: #1c1c1c;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    }
+    
+    .hero h1 {
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -3px;
+    font-weight: 800;
+    margin-bottom: 24px;
+    }
+    
+    .hero h1 span {
+    display: inline-block;
+    color: #a8ff00;
+    }
+    
+    .hero p {
+    max-width: 650px;
+    margin: 0 auto 34px;
+    color: #bdbdbd;
+    font-size: 17px;
+    }
+    
+    .hero-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0 28px;
+    border-radius: 10px;
+    background: #a8ff00;
+    color: #111111;
+    font-weight: 800;
+    font-size: 15px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .hero-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(168, 255, 0, 0.18);
+    }
+    
+    
+    /* =========================================================
+    GENERAL SECTION STYLES
+    ========================================================= */
+    
+    .humanizer-section,
+    .how-it-works,
+    .features-section,
+    .more-tools {
+    padding: 90px 0;
+    }
+    
+    .section-heading {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 45px;
+    }
+    
+    .section-label {
+    display: inline-block;
+    color: #6a6a6a;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    }
+    
+    .section-heading h2 {
+    font-size: clamp(32px, 5vw, 46px);
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+    margin-bottom: 13px;
+    }
+    
+    .section-heading p {
+    color: #666666;
+    font-size: 15px;
+    }
+    
+    
+    /* =========================================================
+    HUMANIZER TOOL
+    ========================================================= */
+    
+    .humanizer-tool {
+    display: grid;
+    grid-template-columns: 1fr 180px 1fr;
+    gap: 18px;
+    align-items: stretch;
+    }
+    
+    .text-panel {
+    background: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 16px;
+    overflow: hidden;
+    min-width: 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+    }
+    
+    .panel-header {
+    min-height: 72px;
+    padding: 15px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    border-bottom: 1px solid #eeeeee;
+    }
+    
+    .panel-header h3 {
+    font-size: 15px;
+    margin-bottom: 2px;
+    }
+    
+    .panel-subtitle {
+    display: block;
+    color: #888888;
+    font-size: 12px;
+    }
+    
+    .text-panel textarea {
+    width: 100%;
+    min-height: 330px;
+    display: block;
+    resize: vertical;
+    border: 0;
+    outline: 0;
+    padding: 20px;
+    background: #ffffff;
+    color: #222222;
+    font-size: 14px;
+    line-height: 1.7;
+    }
+    
+    .text-panel textarea::placeholder {
+    color: #a0a0a0;
+    }
+    
+    .panel-footer {
+    min-height: 46px;
+    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-top: 1px solid #eeeeee;
+    color: #888888;
+    font-size: 11px;
+    }
+    
+    .clear-button,
+    .copy-button {
+    border: 1px solid #dddddd;
+    background: #ffffff;
+    color: #555555;
+    border-radius: 7px;
+    padding: 7px 11px;
+    font-size: 12px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    }
+    
+    .clear-button:hover,
+    .copy-button:hover {
+    border-color: #111111;
+    color: #111111;
+    }
+    
+    
+    /* =========================================================
+    SETTINGS
+    ========================================================= */
+    
+    .humanizer-settings {
+    background: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 22px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+    }
+    
+    .setting-group label {
+    display: block;
+    color: #333333;
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    }
+    
+    .setting-group select {
+    width: 100%;
+    height: 44px;
+    padding: 0 10px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #222222;
+    outline: none;
+    font-size: 12px;
+    }
+    
+    .setting-group select:focus {
+    border-color: #111111;
+    }
+    
+    .humanize-button {
+    width: 100%;
+    min-height: 48px;
+    border: 0;
+    border-radius: 9px;
+    background: #111111;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    transition: transform 0.2s ease, background 0.2s ease;
+    }
+    
+    .humanize-button:hover {
+    transform: translateY(-2px);
+    background: #242424;
+    }
+    
+    .button-icon {
+    color: #a8ff00;
+    margin-right: 5px;
+    }
+    
+    
+    /* =========================================================
+    OUTPUT
+    ========================================================= */
+    
+    .output-area {
+    min-height: 330px;
+    padding: 20px;
+    color: #222222;
+    font-size: 14px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    }
+    
+    .empty-output {
+    min-height: 290px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #999999;
+    padding: 20px;
+    }
+    
+    .empty-icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: #f0f1f2;
+    color: #777777;
+    font-size: 20px;
+    margin-bottom: 15px;
+    }
+    
+    .empty-output h4 {
+    color: #555555;
+    font-size: 14px;
+    margin-bottom: 5px;
+    }
+    
+    .empty-output p {
+    max-width: 280px;
+    font-size: 12px;
+    line-height: 1.6;
+    }
+    
+    
+    /* =========================================================
+    NOTICE
+    ========================================================= */
+    
+    .tool-notice {
+    margin-top: 18px;
+    padding: 15px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: #ffffff;
+    border: 1px solid #e7e7e7;
+    border-radius: 10px;
+    color: #666666;
+    }
+    
+    .notice-icon {
+    font-size: 15px;
+    color: #777777;
+    }
+    
+    .tool-notice p {
+    font-size: 12px;
+    }
+    
+    
+    /* =========================================================
+    HOW IT WORKS
+    ========================================================= */
+    
+    .how-it-works {
+    background: #ffffff;
+    }
+    
+    .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    }
+    
+    .step-card {
+    padding: 25px;
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+    background: #ffffff;
+    }
+    
+    .step-number {
+    color: #888888;
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    }
+    
+    .step-card h3 {
+    font-size: 17px;
+    margin-bottom: 9px;
+    }
+    
+    .step-card p {
+    color: #707070;
+    font-size: 13px;
+    }
+    
+    
+    /* =========================================================
+    FEATURES
+    ========================================================= */
+    
+    .features-section {
+    background: #f7f8fa;
+    }
+    
+    .features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    }
+    
+    .feature-card {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+    padding: 28px 22px;
+    }
+    
+    .feature-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    background: #f0f1f2;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    font-size: 18px;
+    }
+    
+    .feature-card h3 {
+    font-size: 17px;
+    margin-bottom: 8px;
+    }
+    
+    .feature-card p {
+    color: #707070;
+    font-size: 13px;
+    }
+    
+    
+    /* =========================================================
+    MORE TOOLS
+    ========================================================= */
+    
+    .more-tools {
+    background: #ffffff;
+    }
+    
+    .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    }
+    
+    .tool-card {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 17px;
+    border: 1px solid #e4e4e4;
+    border-radius: 12px;
+    background: #ffffff;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    
+    .tool-card:hover {
+    transform: translateY(-3px);
+    border-color: #bdbdbd;
+    }
+    
+    .tool-card-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    background: #f2f3f4;
+    border-radius: 9px;
+    font-size: 17px;
+    }
+    
+    .tool-card strong {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 2px;
+    }
+    
+    .tool-card small {
+    display: block;
+    color: #888888;
+    font-size: 11px;
+    }
+    
+    
+    /* =========================================================
+    FOOTER
+    ========================================================= */
+    
+    .site-footer {
+    background: #111111;
+    color: #ffffff;
+    }
+    
+    .footer-content {
+    padding: 55px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+    }
+    
+    .footer-brand p {
+    max-width: 300px;
+    color: #999999;
+    font-size: 13px;
+    margin-top: 14px;
+    }
+    
+    .footer-links {
+    display: flex;
+    gap: 25px;
+    }
+    
+    .footer-links a {
+    color: #aaaaaa;
+    font-size: 12px;
+    }
+    
+    .footer-links a:hover {
+    color: #ffffff;
+    }
+    
+    .footer-bottom {
+    border-top: 1px solid #292929;
+    padding: 18px 0;
+    }
+    
+    .footer-bottom p {
+    color: #777777;
+    font-size: 11px;
+    }
+    
+    
+    /* =========================================================
+    RESPONSIVE — TABLET
+    ========================================================= */
+    
+    @media (max-width: 950px) {
+    
+    .humanizer-tool {
+    grid-template-columns: 1fr;
+    }
+    
+    .humanizer-settings {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    }
+    
+    .humanize-button {
+    grid-column: 1 / -1;
+    }
+    
+    .steps-grid,
+    .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+    }
+    }
+    
+    
+    /* =========================================================
+    RESPONSIVE — MOBILE
+    ========================================================= */
+    
+    @media (max-width: 650px) {
+    
+    .header-container {
+    min-height: 64px;
+    }
+    
+    .main-nav {
+    display: none;
+    }
+    
+    .menu-toggle {
+    display: block;
+    }
+    
+    .hero {
+    padding: 70px 0 75px;
+    }
+    
+    .hero h1 {
+    letter-spacing: -2px;
+    }
+    
+    .hero p {
+    font-size: 15px;
+    }
+    
+    .humanizer-section,
+    .how-it-works,
+    .features-section,
+    .more-tools {
+    padding: 65px 0;
+    }
+    
+    .section-heading {
+    margin-bottom: 30px;
+    }
+    
+    .section-heading h2 {
+    letter-spacing: -1px;
+    }
+    
+    .humanizer-settings {
+    grid-template-columns: 1fr;
+    }
+    
+    .humanize-button {
+    grid-column: auto;
+    }
+    
+    .text-panel textarea,
+    .output-area {
+    min-height: 280px;
+    }
+    
+    .panel-footer {
+    flex-wrap: wrap;
+    }
+    
+    .steps-grid,
+    .features-grid,
+    .tools-grid {
+    grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+    flex-direction: column;
+    padding: 45px 0;
+    }
+    
+    .footer-links {
+    flex-direction: column;
+    gap: 12px;
+    }
+    
+    }
+    
+    
+    /* =========================================================
+    SMALL MOBILE
+    ========================================================= */
+    
+    @media (max-width: 400px) {
+    
+    .hero h1 {
+    font-size: 39px;
+    }
+    
+    .hero-button {
+    width: 100%;
+    }
+    
+    .panel-header {
+    align-items: flex-start;
+    }
+    
+    .clear-button,
+    .copy-button {
+    flex-shrink: 0;
+    }
+    
+    }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header">
+        <div class="container header-container">
+
+            <a href="#" class="logo">
+                <span class="logo-icon">T</span>
+                <span>ToolBox</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="#humanizer">AI Humanizer</a>
+                <a href="#how-it-works">How It Works</a>
+            </nav>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+                ☰
+            </button>
+
+        </div>
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+    <main>
+
+        <section class="hero">
+            <div class="container hero-content">
+
+                <span class="hero-badge">✦ AI Writing Tool</span>
+
+                <h1>
+                    Make AI Text Sound
+                    <span>More Human</span>
+                </h1>
+
+                <p>
+                    Rewrite AI-generated text into natural, readable content
+                    with our simple and fast AI Text Humanizer.
+                </p>
+
+                <a href="#humanizer" class="hero-button">
+                    Humanize Text
+                </a>
+
+            </div>
+        </section>
+
+
+        <!-- ================= HUMANIZER TOOL ================= -->
+        <section class="humanizer-section" id="humanizer">
+
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">AI HUMANIZER</span>
+
+                    <h2>
+                        Humanize Your Text
+                    </h2>
+
+                    <p>
+                        Paste your text below and choose the writing style
+                        that best fits your content.
+                    </p>
+                </div>
+
+
+                <div class="humanizer-tool">
+
+                    <!-- INPUT PANEL -->
+                    <div class="text-panel input-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+                                <h3>AI-Generated Text</h3>
+                                <span class="panel-subtitle">
+                                    Paste your text here
+                                </span>
+                            </div>
+
+                            <button
+                                type="button"
+                                class="clear-button"
+                                id="clearInput">
+                                Clear
+                            </button>
+
+                        </div>
+
+
+                        <textarea
+                            id="inputText"
+                            placeholder="Paste your AI-generated text here..."
+                            maxlength="10000"></textarea>
+
+
+                        <div class="panel-footer">
+
+                            <span id="inputWordCount">
+                                0 words
+                            </span>
+
+                            <span id="inputCharCount">
+                                0 / 10,000 characters
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SETTINGS -->
+                    <div class="humanizer-settings">
+
+                        <div class="setting-group">
+
+                            <label for="tone">
+                                Writing Style
+                            </label>
+
+                            <select id="tone">
+
+                                <option value="natural">
+                                    Natural
+                                </option>
+
+                                <option value="professional">
+                                    Professional
+                                </option>
+
+                                <option value="casual">
+                                    Casual
+                                </option>
+
+                                <option value="academic">
+                                    Academic
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="setting-group">
+
+                            <label for="strength">
+                                Humanization Strength
+                            </label>
+
+                            <select id="strength">
+
+                                <option value="light">
+                                    Light
+                                </option>
+
+                                <option value="medium" selected>
+                                    Medium
+                                </option>
+
+                                <option value="strong">
+                                    Strong
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="humanize-button"
+                            id="humanizeButton">
+
+                            <span class="button-icon">✦</span>
+                            Humanize Text
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- OUTPUT PANEL -->
+                    <div class="text-panel output-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+                                <h3>Humanized Text</h3>
+                                <span class="panel-subtitle">
+                                    Your rewritten text will appear here
+                                </span>
+                            </div>
+
+                            <button
+                                type="button"
+                                class="copy-button"
+                                id="copyOutput">
+
+                                Copy
+
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            class="output-area"
+                            id="outputText">
+
+                            <div class="empty-output">
+
+                                <div class="empty-icon">
+                                    ✦
+                                </div>
+
+                                <h4>Your humanized text will appear here</h4>
+
+                                <p>
+                                    Add some text on the left and click
+                                    "Humanize Text" to get started.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="panel-footer">
+
+                            <span id="outputWordCount">
+                                0 words
+                            </span>
+
+                            <span id="outputCharCount">
+                                0 characters
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TOOL NOTICE -->
+                <div class="tool-notice">
+
+                    <span class="notice-icon">ⓘ</span>
+
+                    <p>
+                        <strong>Tip:</strong>
+                        For the best results, use clear and complete
+                        sentences rather than isolated phrases.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= HOW IT WORKS ================= -->
+        <section class="how-it-works" id="how-it-works">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        SIMPLE PROCESS
+                    </span>
+
+                    <h2>
+                        How It Works
+                    </h2>
+
+                    <p>
+                        Humanize your text in just a few simple steps.
+                    </p>
+
+                </div>
+
+
+                <div class="steps-grid">
+
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            01
+                        </div>
+
+                        <h3>
+                            Paste Your Text
+                        </h3>
+
+                        <p>
+                            Add the AI-generated content you want to
+                            rewrite into the text box.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            02
+                        </div>
+
+                        <h3>
+                            Choose Your Style
+                        </h3>
+
+                        <p>
+                            Select a writing style and humanization
+                            strength for your content.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            03
+                        </div>
+
+                        <h3>
+                            Humanize
+                        </h3>
+
+                        <p>
+                            Click the button and let ToolBox rewrite
+                            your content.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            04
+                        </div>
+
+                        <h3>
+                            Copy & Use
+                        </h3>
+
+                        <p>
+                            Copy your rewritten text and use it wherever
+                            you need it.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FEATURES ================= -->
+        <section class="features-section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        WHY TOOLBOX
+                    </span>
+
+                    <h2>
+                        Built For Better Writing
+                    </h2>
+
+                </div>
+
+
+                <div class="features-grid">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            ⚡
+                        </div>
+
+                        <h3>
+                            Fast
+                        </h3>
+
+                        <p>
+                            Rewrite your content quickly without complicated
+                            settings or unnecessary steps.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            ✦
+                        </div>
+
+                        <h3>
+                            Multiple Styles
+                        </h3>
+
+                        <p>
+                            Choose between natural, professional, casual,
+                            and academic writing styles.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            🔒
+                        </div>
+
+                        <h3>
+                            Simple & Private
+                        </h3>
+
+                        <p>
+                            Your text stays in your browser during the
+                            basic version of the tool.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            📱
+                        </div>
+
+                        <h3>
+                            Works Anywhere
+                        </h3>
+
+                        <p>
+                            Use the humanizer from your phone, tablet,
+                            or desktop.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+
+        <div class="container footer-content">
+
+            <div class="footer-brand">
+
+                <a href="#" class="logo">
+                    <span class="logo-icon">T</span>
+                    <span>ToolBox</span>
+                </a>
+
+                <p>
+                    Simple, useful tools for everyday digital tasks.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="#humanizer">
+                    AI Humanizer
+                </a>
+
+                <a href="#how-it-works">
+                    How It Works
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <div class="container">
+
+                <p>
+                    © 2026 ToolBox. All rights reserved.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script>
+document.addEventListener("DOMContentLoaded",function(){
+const input=document.getElementById("inputText"),output=document.getElementById("outputText"),
+btn=document.getElementById("humanizeButton"),clear=document.getElementById("clearInput"),
+copy=document.getElementById("copyOutput"),tone=document.getElementById("tone"),
+strength=document.getElementById("strength"),iw=document.getElementById("inputWordCount"),
+ic=document.getElementById("inputCharCount"),ow=document.getElementById("outputWordCount"),
+oc=document.getElementById("outputCharCount"),menu=document.getElementById("menuToggle"),
+nav=document.querySelector(".main-nav");
+
+function words(t){return t.trim()?t.trim().split(/\s+/).length:0}
+function countsIn(){iw.textContent=words(input.value)+" words";ic.textContent=input.value.length.toLocaleString()+" / 10,000 characters"}
+function countsOut(t){ow.textContent=words(t)+" words";oc.textContent=t.length.toLocaleString()+" characters"}
+function esc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}
+function replacePhrases(text,map){
+Object.keys(map).forEach(function(p){text=text.replace(new RegExp("\\b"+esc(p)+"\\b","gi"),function(m){
+let r=map[p]; if(m===m.toUpperCase())return r.toUpperCase();
+if(m[0]===m[0].toUpperCase())return r[0].toUpperCase()+r.slice(1); return r;});});return text;
+}
+function humanize(text,t,s){
+let r=text.trim();
+const map={
+"In today's world":"Today","In today's society":"Today","In the modern world":"Today",
+"It is important to note that":"It's worth noting that","It is important to understand that":"It's important to understand that",
+"It is worth noting that":"It's worth mentioning that","Furthermore":"Also","Moreover":"Also","Additionally":"Also",
+"In addition":"Also","Therefore":"So","Consequently":"As a result","Nevertheless":"Still","Nonetheless":"Still",
+"In conclusion":"Overall","To conclude":"Overall","In summary":"Overall","Due to the fact that":"Because",
+"In order to":"To","A significant number of":"Many","A wide range of":"Many different",
+"At this point in time":"Right now","For the purpose of":"To","With regard to":"About","With respect to":"About",
+"It can be seen that":"You can see that","It should be noted that":"It's worth noting that",
+"This demonstrates that":"This shows that","This highlights the fact that":"This shows that",
+"Has the ability to":"Can","In the event that":"If","On a daily basis":"Every day",
+"At the present time":"Now","A number of":"Several","The majority of":"Most"};
+if(s!=="light")r=replacePhrases(r,map);
+if(t==="casual")r=r.replace(/\bdo not\b/gi,"don't").replace(/\bcannot\b/gi,"can't").replace(/\bdoes not\b/gi,"doesn't").replace(/\bis not\b/gi,"isn't").replace(/\bare not\b/gi,"aren't").replace(/\bwill not\b/gi,"won't").replace(/\bit is\b/gi,"it's").replace(/\bthat is\b/gi,"that's");
+if(t==="professional")r=r.replace(/\bcan't\b/gi,"cannot").replace(/\bdon't\b/gi,"do not").replace(/\bwon't\b/gi,"will not").replace(/\ba lot of\b/gi,"many");
+if(t==="academic")r=r.replace(/\ba lot of\b/gi,"a substantial amount of").replace(/\bshow\b/gi,"demonstrate").replace(/\bget\b/gi,"obtain");
+if(s==="strong")r=r.replace(/\bvery very\b/gi,"extremely").replace(/\breally really\b/gi,"extremely").replace(/\bbasically\b/gi,"").replace(/\bin fact\b/gi,"actually");
+return r.replace(/[ \t]+/g," ").replace(/\n{3,}/g,"\n\n").trim();
+}
+input.addEventListener("input",countsIn);
+btn.addEventListener("click",function(){
+let text=input.value.trim();if(!text){input.focus();return}
+btn.disabled=true;btn.innerHTML='<span class="button-icon">✦</span> Humanizing...';
+setTimeout(function(){let r=humanize(text,tone.value,strength.value);output.textContent=r;countsOut(r);
+btn.disabled=false;btn.innerHTML='<span class="button-icon">✦</span> Humanize Text'},350);
+});
+clear.addEventListener("click",function(){input.value="";output.innerHTML='<div class="empty-output"><div class="empty-icon">✦</div><h4>Your humanized text will appear here</h4><p>Add some text on the left and click "Humanize Text" to get started.</p></div>';countsIn();countsOut("")});
+copy.addEventListener("click",async function(){if(output.querySelector(".empty-output"))return;let t=output.textContent.trim();if(!t)return;try{await navigator.clipboard.writeText(t)}catch(e){let x=document.createElement("textarea");x.value=t;document.body.appendChild(x);x.select();document.execCommand("copy");x.remove()}let old=copy.textContent;copy.textContent="Copied!";setTimeout(()=>copy.textContent=old,1400)});
+menu.addEventListener("click",function(){nav.classList.toggle("mobile-open");nav.style.display=nav.classList.contains("mobile-open")?"flex":""});
+countsIn();countsOut("");
+});
+</script>
+
+</body>
+</html>
